@@ -1,0 +1,37 @@
+/* const pintarOption1 = data =>{
+    data.forEach(divisas=>{
+        const {id,nombre,sigla,rate} = divisas;
+        templateCard.querySelector('.convert').textContent = nombre;
+        templateCard.querySelector('.convert').dataset.id = id;
+        templateCard.querySelector('.convert').id = sigla;
+        templateCard.querySelector('.convert').value = rate;
+        
+
+        // console.log(divisas)
+        // console.log(nombre)
+        const clone = templateCard.cloneNode(true);
+        fragment.appendChild(clone);
+    })
+    optionsDe.appendChild(fragment);
+
+    data.forEach(divisas=>{
+        const {id,nombre,sigla,rate} = divisas;
+        templateCard.querySelector('.convert').textContent = nombre;
+        templateCard.querySelector('.convert').dataset.id = id;
+        templateCard.querySelector('.convert').id = sigla;
+        templateCard.querySelector('.convert').value = rate;
+        
+
+        // console.log(divisas)
+        // console.log(nombre)
+        const clone = templateCard.cloneNode(true);
+        fragment.appendChild(clone);
+    })
+    optionsA.appendChild(fragment);
+    
+
+
+    
+    
+    
+}   */

@@ -1,111 +1,80 @@
-const optionsDe = document.getElementById('optionsDe');
-const optionsA = document.getElementById('optionsA');
-const templateCard = document.getElementById('template-card').content;
+import {
+    data
+} from './data/data.js';
+console.log(data)
+
+const items = document.getElementById('items');
+let opcionesEn = document.querySelector('.opcionesEn')
+let opcionesSal = document.querySelector('.opcionesSal')
+let resultado = document.querySelector('#converResult')
+
+
+// console.log(resultado)
+
 const fragment = document.createDocumentFragment();
-const resultado = document.getElementById('result');
-const templateFooter = document.getElementById('template-footer').content;
 
 
-const API_URL = 'http://api.exchangeratesapi.io/v1/latest?access_key=ae865afc24626c58fe37f6c90bd8ba13'
+data.forEach(valores => {
+    const {
+        id,
+        sigla,
+        nombre,
+        rate
+    } = valores
 
-// console.log(templateCard)
-// console.log(templateFooter) 
+    const item = document.createElement('option')
+    item.setAttribute('value', rate)
+    item.dataset.id = id
+    item.setAttribute('id', sigla)
+    item.textContent = nombre
 
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetchData();
+    fragment.appendChild(item)
 })
 
-const fetchData = async () => {
-    try {
-        //  const res = await fetch('./data/api.json')
-        const res = await fetch(API_URL)
-        const data = await res.json();
-        // const dataReady = data.rates
-        // console.log(dataReady);
+opcionesEn.appendChild(fragment)
 
-        // pintarOption1(data);   
-        pintarOptions(data);
+data.forEach(valores => {
+    const {
+        id,
+        sigla,
+        nombre,
+        rate
+    } = valores
 
-
-
-    } catch (error) {
-        console.log(error)
-    }
-
-}
-
-const pintarOptions= data => {  
-
-    const dataReady = (data.rates)
-   console.log(dataReady)
-
-   Object.entries(dataReady).forEach(([key,value])=>{
-    templateCard.querySelector('.convert').textContent = key
-    templateCard.querySelector('.convert').value = value
-    const clone = templateCard.cloneNode(true);
-        fragment.appendChild(clone);
+    const item = document.createElement('option')
+    item.setAttribute('value', rate)
+    item.dataset.id = id
+    item.setAttribute('id', sigla)
+    item.textContent = nombre
 
 
+    fragment.appendChild(item)
 
+})
+opcionesSal.appendChild(fragment)
 
-       console.log(key + ' ' + value)
-   })
-   optionsDe.appendChild(fragment);
+// console.log(opcionesEn.value)
+// console.log(opcionesSal)
 
-   Object.entries(dataReady).forEach(([key,value])=>{
-    templateCard.querySelector('.convert').textContent = key
-    templateCard.querySelector('.convert').value = value
-    const clone = templateCard.cloneNode(true);
-        fragment.appendChild(clone);
+ form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-
-
-
-       console.log(key + ' ' + value)
-   })
-   optionsA.appendChild(fragment);
-
-}
-
-
-/* const pintarOption1 = data =>{
-    data.forEach(divisas=>{
-        const {id,nombre,sigla,rate} = divisas;
-        templateCard.querySelector('.convert').textContent = nombre;
-        templateCard.querySelector('.convert').dataset.id = id;
-        templateCard.querySelector('.convert').id = sigla;
-        templateCard.querySelector('.convert').value = rate;
-        
-
-        // console.log(divisas)
-        // console.log(nombre)
-        const clone = templateCard.cloneNode(true);
-        fragment.appendChild(clone);
-    })
-    optionsDe.appendChild(fragment);
-
-    data.forEach(divisas=>{
-        const {id,nombre,sigla,rate} = divisas;
-        templateCard.querySelector('.convert').textContent = nombre;
-        templateCard.querySelector('.convert').dataset.id = id;
-        templateCard.querySelector('.convert').id = sigla;
-        templateCard.querySelector('.convert').value = rate;
-        
-
-        // console.log(divisas)
-        // console.log(nombre)
-        const clone = templateCard.cloneNode(true);
-        fragment.appendChild(clone);
-    })
-    optionsA.appendChild(fragment);
+    const montoConvert = document.querySelector('#montoConvert').value;
+    
+    // console.log(montoConvert)
     
 
+    const cambioEn = opcionesEn.value;
+    const cambioSal = opcionesSal.value;
 
-    
-    
-    
-}   */
+    let resultadoConversion = montoConvert * cambioSal / cambioEn
+
+   
+
+
+    if(montoConvert <= 0 || isNaN(montoConvert)==true) {
+        resultado.textContent = 'ERROR'
+    }else{
+
+        resultado.textContent = resultadoConversion.toFixed(5);    }
+}) 
